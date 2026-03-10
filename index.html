@@ -1,197 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        <title>Portfolio</title>
 
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="CSS/stylesheet.css">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tran Ba Dai — Portfolio</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="CSS/stylesheet.css">
+</head>
 
-        <header>
-            <nav class="navbar">
-                <div class="logo">Tran Ba Dai</div>
-                <ul class="nav-links">
-                    <li><a href="#Home" class="active">Home</a></li>
-                    <li><a href="#About">About</a></li>
-                    <li><a href="#Service">Service</a></li>
-                    <li><a href="#Portfolio">Portfolio</a></li>
-                    <li><a href="#Contact">Contact</a></li>
-                </ul>
-            </nav>                        
-        </header>
-        
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Hi I'm <span class="highlight">Tran Ba Dai</span></h1>
+<body>
+
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">TBD<span>.</span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class='bx bx-sun'></i>
+            </button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+        <div class="hero-inner">
+            <div class="hero-content" data-reveal>
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Available for work
+                </div>
+                <h1>Hi, I'm <span class="highlight">Tran Ba Dai</span></h1>
                 <h2 class="typing" data-animate-typing="true"></h2>
-                <p>
-                    I build modern, responsive websites with clean and maintainable code.
-                </p>
-
+                <p>I craft modern, responsive web experiences with clean and maintainable code — bridging design and
+                    functionality seamlessly.</p>
                 <div class="cta-buttons">
-                    <a href="#" class="btn-cv">View My CV</a>
-                    <div class="social-btn">
-                        <a href="https://www.facebook.com/daitb2004" target="_blank" rel="noopener noreferrer">
-                            <i class='bx bxl-facebook-circle'></i>
-                        </a>
-                        <a href="#LinkedIn"><i class='bx bxl-linkedin-square' ></i></a>
-                        <a href="https://github.com/daitb" target="_blank" rel="noopener noreferrer">
-                            <i class='bx bxl-github' ></i>
-                        </a>
-                    </div>
+                    <a href="https://drive.google.com/drive/folders/1_ux6CSqWI258jbVcbN22hVa5bxS94UCg?usp=sharing" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                        <i class='bx bx-show'></i> View CV
+                    </a>
+                    <a href="#contact" class="btn-outline">
+                        Hire Me <i class='bx bx-right-arrow-alt'></i>
+                    </a>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/daitb2004" target="_blank" rel="noopener noreferrer"
+                        aria-label="Facebook">
+                        <i class='bx bxl-facebook-circle'></i>
+                    </a>
+                    <!-- <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn">
+                        <i class='bx bxl-linkedin-square'></i>
+                    </a> -->
+                    <a href="https://github.com/daitb" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <i class='bx bxl-github'></i>
+                    </a>
                 </div>
             </div>
-
-            <div class="hero-image">
-                <img src="images/Hero-Images/hero-image.jpg" alt="">
+            <div class="hero-visual" data-reveal>
+                <div class="avatar-ring ring-outer"></div>
+                <div class="avatar-ring ring-inner"></div>
+                <div class="avatar-wrapper">
+                    <img src="images/Hero-Images/hero-image.jpg" alt="Tran Ba Dai">
+                </div>
+                <div class="floating-badge badge-1">
+                    <i class='bx bx-server'></i>
+                    <span>ASP.NET</span>
+                </div>
+                <div class="floating-badge badge-2">
+                    <i class='bx bxl-react'></i>
+                    <span>React</span>
+                </div>
+                <div class="floating-badge badge-3">
+                    <i class='bx bxl-java'></i>
+                    <span>Java</span>
+                </div>
             </div>
-        </section>
+        </div>
+        <a href="#about" class="scroll-down" aria-label="Scroll down">
+            <i class='bx bx-chevron-down'></i>
+        </a>
+    </section>
 
-        <section id="about" class="about">
-            <h2>About me</h2>
-
-            <div class="about-content">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                    Accusamus atque minus ullam non maxime, ipsum labore impedit, 
-                    dolorum pariatur nemo ut dicta optio modi dolore possimus nam eum temporibus sapiente?
-                </p>               
-                <dotlottie-wc 
-                    src="https://lottie.host/3e1ca6f4-932e-49b8-adf3-582a75ba67b0/gHWIBhhIg9.lottie" 
-                    style="width: 400px;height: 400px" 
-                    autoplay 
-                    loop>
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="section-header" data-reveal>
+            <span class="section-tag">Who I Am</span>
+            <h2>About <span class="highlight">Me</span></h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-visual" data-reveal>
+                <dotlottie-wc src="https://lottie.host/3e1ca6f4-932e-49b8-adf3-582a75ba67b0/gHWIBhhIg9.lottie"
+                    style="width: 350px; height: 350px" autoplay loop>
                 </dotlottie-wc>
             </div>
-
-            <div class="about-cards">
-                <div class="card-item">
-                    <div class="icon">
-                        <i class='bx bx-code-alt'></i>
-                        <span>11</span>
+            <div class="about-text" data-reveal>
+                <p>I'm a passionate <strong>Full Stack Developer</strong> with 2+ years of experience building modern
+                    web applications. I specialize in delivering seamless user experiences using React, Java, and C#.
+                </p>
+                <p>I love turning complex problems into elegant, maintainable solutions. When I'm not coding, I'm
+                    exploring new technologies and contributing to open-source projects.</p>
+                <div class="about-stats">
+                    <div class="stat" data-count="3">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Projects Done</span>
                     </div>
-                    <h4>Total Project</h4>
-                    <p>Innovative web solutions crafted</p>
+                    <div class="stat" data-count="1" hidden>
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat" data-count="6">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
                 </div>
-                <div class="card-item">
-                    <div class="icon">
-                        <i class='bx bx-timer'></i>
-                        <span>2</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="portfolio">
+        <div class="section-header" data-reveal>
+            <span class="section-tag">My Work</span>
+            <h2>My <span class="highlight">Portfolio</span></h2>
+        </div>
+        <div class="tabs" data-reveal>
+            <button class="tab active" data-target="projects">
+                <i class='bx bx-layer'></i> Projects
+            </button>
+            <button class="tab" data-target="tech">
+                <i class='bx bx-chip'></i> Tech Stack
+            </button>
+        </div>
+        <div class="content-wrapper">
+            <!-- Projects -->
+            <div id="projects" class="content active">
+                <div class="project-card" data-reveal>
+                    <div class="project-image">
+                        <img src="images/Project-Images/e-commerce.jpg" alt="E-Commerce Platform">
+                        <div class="project-overlay">
+                            <a href="#" class="overlay-btn" aria-label="Live Demo"><i
+                                    class='bx bx-link-external'></i></a>
+                            <a href="#" class="overlay-btn" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+                        </div>
                     </div>
-                    <h4>Year of experiences</h4>
-                    <p>Continuous learning journey</p>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span>React</span><span>Node.js</span><span>MongoDB</span>
+                        </div>
+                        <h3>E-Commerce Platform</h3>
+                        <p>A full-featured e-commerce platform with product management, cart system, and payment
+                            integration.</p>
+                    </div>
                 </div>
-
-            </div>
-        </section>
-
-        <section class="portfolio">
-            <h2>Portfolio</h2>
-            <div class="tabs">
-                <div class="tab active" data-target="projects">Projects</div>
-                <div class="tab" data-target="tech">Tech Stack</div>
-            </div>
-            
-            <div class="content-wrapper">
-                 <!-- Project -->
-                <div id="projects" class="content active">
-
-                    <div class="project-card">
-                        <h3>E-Commer</h3>
-                        <img src="images/Project-Images/e-commerce.jpg" alt="E-Commer">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti facilis itaque, consequuntur architecto tempore eligendi ipsa alias explicabo, placeat adipisci nemo qui nesciunt natus, exercitationem eveniet eius vitae non quaerat!</p>
-                        <div class="project-link">
-                            <a href="#">Live Demo</a>
-                            <button>Detail</button>
+                <div class="project-card" data-reveal>
+                    <div class="project-image">
+                        <img src="images/Project-Images/e-commerce1.jpg" alt="Shop Management">
+                        <div class="project-overlay">
+                            <a href="#" class="overlay-btn" aria-label="Live Demo"><i
+                                    class='bx bx-link-external'></i></a>
+                            <a href="#" class="overlay-btn" aria-label="GitHub"><i class='bx bxl-github'></i></a>
                         </div>
                     </div>
-
-                    <div class="project-card">
-                        <h3>E-Commer</h3>
-                        <img src="images/Project-Images/e-commerce1.jpg" alt="E-Commer">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti facilis itaque, consequuntur architecto tempore eligendi ipsa alias explicabo, placeat adipisci nemo qui nesciunt natus, exercitationem eveniet eius vitae non quaerat!</p>
-                        <div class="project-link">
-                            <a href="#">Live Demo</a>
-                            <button>Detail</button>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span>Java</span><span>Spring Boot</span><span>MySQL</span>
+                        </div>
+                        <h3>Shop Management System</h3>
+                        <p>Comprehensive shop management with inventory tracking, order processing, and an analytics
+                            dashboard.</p>
+                    </div>
+                </div>
+                <div class="project-card" data-reveal>
+                    <div class="project-image">
+                        <img src="images/Project-Images/e-commerce2.jpg" alt="Online Store">
+                        <div class="project-overlay">
+                            <a href="#" class="overlay-btn" aria-label="Live Demo"><i
+                                    class='bx bx-link-external'></i></a>
+                            <a href="#" class="overlay-btn" aria-label="GitHub"><i class='bx bxl-github'></i></a>
                         </div>
                     </div>
-
-                    <div class="project-card">
-                        <h3>E-Commer</h3>
-                        <img src="images/Project-Images/e-commerce2.jpg" alt="E-Commer">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti facilis itaque, consequuntur architecto tempore eligendi ipsa alias explicabo, placeat adipisci nemo qui nesciunt natus, exercitationem eveniet eius vitae non quaerat!</p>
-                        <div class="project-link">
-                            <a href="#">Live Demo</a>
-                            <button>Detail</button>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span>C#</span><span>.NET</span><span>SQL Server</span>
                         </div>
+                        <h3>Online Store</h3>
+                        <p>A scalable online store built with .NET backend, featuring real-time inventory and user
+                            management.</p>
                     </div>
-
-                </div> 
-
-                <!-- Tech -->
-                <div id="tech" class="content">
-                    <div class="tech-icon">
-                        <img src="images/Tech-Images/html.svg" alt="Html-icon">
-                        <span>HTML</span>
-                    </div>
-                    <div class="tech-icon">
-                        <img src="images/Tech-Images/css3.svg" alt="Css-icon">
-                        <span>CSS3</span>
-                    </div>
-                    <div class="tech-icon">
-                        <img src="images/Tech-Images/javascript.svg" alt="Js-icon">
-                        <span>Javascript</span>
-                    </div>
-                    <div class="tech-icon">
-                        <img src="images/Tech-Images/java.svg" alt="Java-icon">
-                        <span>Java</span>
-                    </div>  
-                    <div class="tech-icon">
-                        <img src="images/Tech-Images/c-sharp.svg" alt="Csharp-icon">
-                        <span>C Sharp</span>
-                    </div>
-                    <div class="tech-icon">
-                        <img src="images/Tech-Images/react.svg" alt="React-icon">
-                        <span>React</span>
-                    </div>   
-                </div>                                    
+                </div>
             </div>
-        </section>
-
-        <section class="contact">
-            <h2>Contact Me</h2>
-
-            <div class="contact-detail">
-                <dotlottie-wc
-                    src="https://lottie.host/04f4f85e-a229-43da-8021-ef2803bba3a8/Dwrj5xKs0n.lottie"
-                    style="width: 400px;height: 400px; margin-left: 50px;"
-                    autoplay
-                    loop
-                ></dotlottie-wc>
-
-                <form action="https://formsubmit.co/tranbadai1234@gmail.com" method="POST">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
+            <!-- Tech -->
+            <div id="tech" class="content">
+                <div class="tech-icon" data-reveal>
+                    <img src="images/Tech-Images/html.svg" alt="HTML5">
+                    <span>HTML5</span>
+                </div>
+                <div class="tech-icon" data-reveal>
+                    <img src="images/Tech-Images/css3.svg" alt="CSS3">
+                    <span>CSS3</span>
+                </div>
+                <div class="tech-icon" data-reveal>
+                    <img src="images/Tech-Images/javascript.svg" alt="JavaScript">
+                    <span>JavaScript</span>
+                </div>
+                <div class="tech-icon" data-reveal>
+                    <img src="images/Tech-Images/java.svg" alt="Java">
+                    <span>Java</span>
+                </div>
+                <div class="tech-icon" data-reveal>
+                    <img src="images/Tech-Images/c-sharp.svg" alt="C#">
+                    <span>C Sharp</span>
+                </div>
+                <div class="tech-icon" data-reveal>
+                    <img src="images/Tech-Images/react.svg" alt="React">
+                    <span>React</span>
+                </div>
             </div>
+        </div>
+    </section>
 
-        </section>
-
-        <footer>
-            <p>&copy; 2025 Tran Ba Dai. All Rights Reserved.</p>
-            <div class="social-links">
-              <a href="https://github.com/daitb" target="_blank">GitHub</a>
-              <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="section-header" data-reveal>
+            <span class="section-tag">Get In Touch</span>
+            <h2>Contact <span class="highlight">Me</span></h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info" data-reveal>
+                <h3>Let's work together!</h3>
+                <p>I'm always excited to collaborate on new projects. Whether it's a startup idea or a full-scale
+                    application — feel free to reach out!</p>
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <i class='bx bx-envelope'></i>
+                        <span>tranbadai1234@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class='bx bx-map'></i>
+                        <span>Da Nang, Vietnam</span>
+                    </div>
+                </div>
+                <dotlottie-wc src="https://lottie.host/04f4f85e-a229-43da-8021-ef2803bba3a8/Dwrj5xKs0n.lottie"
+                    style="width: 280px; height: 280px;" autoplay loop>
+                </dotlottie-wc>
             </div>
-        </footer>
+            <form class="contact-form" data-reveal action="https://formsubmit.co/tranbadai1234@gmail.com" method="POST">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Tran Ba Dai" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..."
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn-primary full-width">
+                    Send Message <i class='bx bx-send'></i>
+                </button>
+            </form>
+        </div>
+    </section>
 
-        <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.0/lottie.min.js"></script>
-        <script src="JS/script.js"></script>
-    </body>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">TBD<span>.</span></div>
+            <p>Crafting modern web experiences since 2024.</p>
+            <div class="footer-links">
+                <a href="https://github.com/daitb" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://www.facebook.com/daitb2004" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </div>
+        </div>
+        <p class="footer-copy">&copy; 2025 Tran Ba Dai. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <i class='bx bx-up-arrow-alt'></i>
+    </button>
+
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
+    <script src="JS/script.js"></script>
+</body>
+
 </html>

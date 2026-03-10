@@ -1,123 +1,226 @@
-/** @type {import('lottie-web')} */
-var lottie;
-
+/* =========================================
+   TYPING ANIMATION
+   ========================================= */
 document.addEventListener("DOMContentLoaded", () => {
-    const typingElement = document.querySelector(".typing");
-    if (!typingElement) return;
+    const typingEl = document.querySelector(".typing");
+    if (!typingEl) return;
 
-    // Configurable phrases and speeds
-    const phrases = ["FullStack Developer", "Design System"]; // Add more strings if needed
-    const typingMsPerChar = 90;   // typing speed
-    const erasingMsPerChar = 45;  // erasing speed
-    const holdAfterTypeMs = 1600; // pause after finishing a phrase
-    const holdAfterEraseMs = 400; // pause before typing next phrase
+    const phrases = ["Backend Developer", "Software Engineer", "Problem Solver"];
+    const TYPE_SPEED  = 80;
+    const ERASE_SPEED = 40;
+    const HOLD_TYPED  = 1800;
+    const HOLD_ERASED = 400;
 
-    // Respect reduced motion with optional override via data-animate-typing="true"
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const forceAnimation = typingElement.getAttribute("data-animate-typing") === "true";
-    if (prefersReducedMotion && !forceAnimation) {
-        typingElement.textContent = phrases[0];
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const forceAnim      = typingEl.getAttribute("data-animate-typing") === "true";
+
+    if (prefersReduced && !forceAnim) {
+        typingEl.textContent = phrases[0];
         return;
     }
 
-    // Ensure we start from empty for proper typing simulation
-    typingElement.textContent = "";
+    typingEl.textContent = "";
 
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isErasing = false;
-    let accumulatorMs = 0;
-    let lastTs = 0;
-    let holdMsRemaining = 0;
-    let rafId = 0;
+    let phraseIdx = 0, charIdx = 0, erasing = false;
+    let acc = 0, lastTs = 0, hold = 0, raf = 0;
 
     function step(ts) {
-        // Pause when the tab is hidden to save CPU/battery
-        if (document.hidden) {
-            lastTs = ts;
-            rafId = requestAnimationFrame(step);
-            return;
-        }
-
+        if (document.hidden) { lastTs = ts; raf = requestAnimationFrame(step); return; }
         if (!lastTs) lastTs = ts;
         const delta = ts - lastTs;
         lastTs = ts;
 
-        if (holdMsRemaining > 0) {
-            holdMsRemaining -= delta;
-            rafId = requestAnimationFrame(step);
-            return;
-        }
+        if (hold > 0) { hold -= delta; raf = requestAnimationFrame(step); return; }
 
-        accumulatorMs += delta;
-        const currentPhrase = phrases[phraseIndex];
-        const interval = isErasing ? erasingMsPerChar : typingMsPerChar;
+        acc += delta;
+        const phrase   = phrases[phraseIdx];
+        const interval = erasing ? ERASE_SPEED : TYPE_SPEED;
 
-        if (accumulatorMs >= interval) {
-            accumulatorMs = 0;
-
-            if (!isErasing) {
-                // typing forward
-                if (charIndex < currentPhrase.length) {
-                    charIndex += 1;
-                    typingElement.textContent = currentPhrase.slice(0, charIndex);
+        if (acc >= interval) {
+            acc = 0;
+            if (!erasing) {
+                if (charIdx < phrase.length) {
+                    typingEl.textContent = phrase.slice(0, ++charIdx);
                 } else {
-                    // finished typing the phrase
-                    isErasing = true;
-                    holdMsRemaining = holdAfterTypeMs;
+                    erasing = true;
+                    hold    = HOLD_TYPED;
                 }
             } else {
-                // erasing backward
-                if (charIndex > 0) {
-                    charIndex -= 1;
-                    typingElement.textContent = currentPhrase.slice(0, charIndex);
+                if (charIdx > 0) {
+                    typingEl.textContent = phrase.slice(0, --charIdx);
                 } else {
-                    // finished erasing, move to next phrase
-                    isErasing = false;
-                    phraseIndex = (phraseIndex + 1) % phrases.length;
-                    holdMsRemaining = holdAfterEraseMs;
+                    erasing   = false;
+                    phraseIdx = (phraseIdx + 1) % phrases.length;
+                    hold      = HOLD_ERASED;
                 }
             }
         }
-
-        rafId = requestAnimationFrame(step);
+        raf = requestAnimationFrame(step);
     }
 
-    // Clean up on page unload/navigation
-    function cleanup() {
-        if (rafId) cancelAnimationFrame(rafId);
-        window.removeEventListener("beforeunload", cleanup);
-        document.removeEventListener("visibilitychange", onVisibilityChange);
-    }
-
-    function onVisibilityChange() {
-        // Reset timing accumulator to avoid burst when returning to tab
-        lastTs = 0;
-        accumulatorMs = 0;
-    }
-
-    document.addEventListener("visibilitychange", onVisibilityChange);
-    window.addEventListener("beforeunload", cleanup);
-    rafId = requestAnimationFrame(step);
+    document.addEventListener("visibilitychange", () => { lastTs = 0; acc = 0; });
+    window.addEventListener("beforeunload", () => { if (raf) cancelAnimationFrame(raf); }, { once: true });
+    raf = requestAnimationFrame(step);
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================================
+   SCROLL EFFECTS
+   ========================================= */
+const header      = document.getElementById("header");
+const progressBar = document.getElementById("scrollProgress");
+const scrollTopBtn= document.getElementById("scrollTop");
 
-    const tabs = document.querySelectorAll(".tab");
-    const contents = document.querySelectorAll(".content");
+window.addEventListener("scroll", () => {
+    const scrollY    = window.scrollY;
+    const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
 
-    tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
+    // Scroll progress bar
+    progressBar.style.width = ((scrollY / docHeight) * 100) + "%";
 
-            tabs.forEach((t) => t.classList.remove("active"));
+    // Sticky header style on scroll
+    header.classList.toggle("scrolled", scrollY > 50);
 
-            tab.classList.add("active");
+    // Scroll-to-top button visibility
+    scrollTopBtn.classList.toggle("visible", scrollY > 400);
 
-            contents.forEach((content) => content.classList.remove("active"));
+    // Active nav link
+    highlightNav(scrollY);
+}, { passive: true });
 
-            const target = tab.getAttribute("data-target");
-            document.getElementById(target).classList.add("active");
+function highlightNav(scrollY) {
+    const offset   = scrollY + 130;
+    const sections = document.querySelectorAll("section[id]");
+    const links    = document.querySelectorAll(".nav-links a");
+
+    sections.forEach(sec => {
+        if (offset >= sec.offsetTop && offset < sec.offsetTop + sec.offsetHeight) {
+            links.forEach(l => l.classList.remove("active"));
+            const active = document.querySelector(`.nav-links a[href="#${sec.id}"]`);
+            if (active) active.classList.add("active");
+        }
+    });
+}
+
+/* =========================================
+   SCROLL REVEAL (Intersection Observer)
+   ========================================= */
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+
+document.querySelectorAll("[data-reveal]").forEach(el => {
+    // Stagger siblings within the same parent container
+    const siblings = Array.from(el.parentElement.children).filter(
+        c => c.hasAttribute("data-reveal")
+    );
+    const idx = siblings.indexOf(el);
+    if (siblings.length > 1 && idx > 0) {
+        el.style.transitionDelay = Math.min(idx * 0.12, 0.48) + "s";
+    }
+    revealObserver.observe(el);
+});
+
+/* =========================================
+   COUNTER ANIMATION
+   ========================================= */
+function animateCount(el) {
+    const target  = parseInt(el.dataset.count, 10);
+    const numEl   = el.querySelector(".stat-number");
+    const duration = 1400;
+    const start    = performance.now();
+
+    function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased    = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        numEl.textContent = Math.round(eased * target) + (progress >= 1 ? "+" : "");
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+
+const statsContainer = document.querySelector(".about-stats");
+if (statsContainer) {
+    const counterObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll(".stat").forEach(animateCount);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    counterObserver.observe(statsContainer);
+}
+
+/* =========================================
+   MOBILE MENU
+   ========================================= */
+const menuToggle = document.getElementById("menuToggle");
+const navLinks   = document.getElementById("navLinks");
+
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+        const open = menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("open", open);
+        document.body.style.overflow = open ? "hidden" : "";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            menuToggle.classList.remove("active");
+            navLinks.classList.remove("open");
+            document.body.style.overflow = "";
         });
     });
+}
+
+/* =========================================
+   PORTFOLIO TABS
+   ========================================= */
+document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".content").forEach(c => c.classList.remove("active"));
+        tab.classList.add("active");
+        const target = document.getElementById(tab.dataset.target);
+        if (target) target.classList.add("active");
+    });
+});
+
+/* =========================================
+   SCROLL TO TOP
+   ========================================= */
+scrollTopBtn?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+/* =========================================
+   THEME TOGGLE
+   ========================================= */
+const themeToggle = document.getElementById("themeToggle");
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    const icon = themeToggle?.querySelector("i");
+    if (icon) icon.className = theme === "light" ? "bx bx-moon" : "bx bx-sun";
+    localStorage.setItem("theme", theme);
+}
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    applyTheme(savedTheme);
+} else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+    applyTheme("light");
+} else {
+    applyTheme("dark");
+}
+
+themeToggle?.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    applyTheme(current === "light" ? "dark" : "light");
 });
 
